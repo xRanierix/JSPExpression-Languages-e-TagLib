@@ -21,4 +21,11 @@ public class FilmeService {
 		FilmeDAO dao = new FilmeDAO();
 		return dao.buscarFilme(id);
 	}
+	
+	public int excluirFilme(int id) throws IOException {
+		FilmeDAO dao = new FilmeDAO();
+		int result = dao.excluirFilme(id);
+		return result;
+		
+	}
 }

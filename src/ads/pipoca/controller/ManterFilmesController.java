@@ -121,7 +121,12 @@ public class ManterFilmesController extends HttpServlet {
 			request.setAttribute("filme", filmeAtualizado);
 			saida = "Filme.jsp";
 			break;
+			
 		case "excluir":
+			
+			idFilme = Integer.parseInt(request.getParameter("id_excluir"));
+			request.setAttribute("filme",filme);
+			saida ="Filme.jsp";
 			break;
 		}
 		RequestDispatcher view = request.getRequestDispatcher(saida);
@@ -130,7 +135,7 @@ public class ManterFilmesController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 
