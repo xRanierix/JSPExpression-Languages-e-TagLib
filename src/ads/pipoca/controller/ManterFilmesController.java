@@ -125,8 +125,18 @@ public class ManterFilmesController extends HttpServlet {
 		case "excluir":
 			
 			idFilme = Integer.parseInt(request.getParameter("id_excluir"));
-			request.setAttribute("filme",filme);
-			saida ="Filme.jsp";
+			
+			filme = fService.buscarFilme(idFilme);
+			if(filme != null ) {
+				
+				int result = fService.excluirFilme(idFilme);
+				request.setAttribute("filme",filme);
+				saida ="Filme.jsp";
+				
+			}else {
+				saida = "nExiste.html";
+			}
+			
 			break;
 		}
 		RequestDispatcher view = request.getRequestDispatcher(saida);
