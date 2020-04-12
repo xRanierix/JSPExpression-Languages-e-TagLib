@@ -12,7 +12,7 @@
 <h1>Novo Filme</h1>
 	<p> Digite os dados do filme para cadastrar</p>
 	<form action="manter_filmes.do" method="POST">
-		<p><label>Tí­tulo do Filme: </label><input type="text" name="titulo" required/></p>
+		<p><label>Título do Filme: </label><input type="text" name="titulo" required/></p>
 		<p><label>Descrição: </label><input type="text" name="descricao" /></p>
 		<p><label>Diretor: </label><input type="text" name="diretor"/>
 		

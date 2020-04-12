@@ -11,6 +11,11 @@ public class FilmeService {
 		FilmeDAO dao = new FilmeDAO();
 		return dao.inserirFilme(filme);
 	}
+	
+	public Filme atualizarFilme(Filme filme) throws IOException {
+		FilmeDAO dao = new FilmeDAO();
+		return dao.atualizarFilme(filme);
+	}
 
 	public Filme buscarFilme(int id) throws IOException {
 		FilmeDAO dao = new FilmeDAO();
