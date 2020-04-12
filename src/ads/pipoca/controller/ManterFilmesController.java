@@ -38,8 +38,14 @@ public class ManterFilmesController extends HttpServlet {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date dataLanc = null;
 		ArrayList<Genero> generos = new ArrayList<Genero>();
+		ArrayList<Filme> filmes = new ArrayList<Filme>();
 		
 		switch(acao) {
+		case "filmes":
+			filmes = fService.listarFilmes();
+			request.setAttribute("filmes", filmes);
+			saida = "ListarFilmes.jsp";
+			break;
 		case "generos":
 			generos = gService.listarGeneros();
 			request.setAttribute("generos", generos);

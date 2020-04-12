@@ -1,6 +1,7 @@
 package ads.pipoca.model.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import ads.pipoca.model.dao.FilmeDAO;
 import ads.pipoca.model.entity.Filme;
@@ -26,6 +27,10 @@ public class FilmeService {
 		FilmeDAO dao = new FilmeDAO();
 		int result = dao.excluirFilme(id);
 		return result;
-		
+	}
+	
+	public ArrayList<Filme> listarFilmes() throws IOException {
+		FilmeDAO dao = new FilmeDAO();
+		return dao.listarFilmes();
 	}
 }

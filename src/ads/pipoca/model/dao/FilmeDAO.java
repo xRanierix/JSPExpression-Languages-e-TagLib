@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import ads.pipoca.model.entity.Filme;
 import ads.pipoca.model.entity.Genero;
@@ -131,6 +132,37 @@ public class FilmeDAO {
 		return result;
 	}
 	
+	public ArrayList<Filme> listarFilmes() throws IOException {
+		ArrayList<Filme> filmes = new ArrayList<>();
+		String sql = "select f.id, titulo, descricao, diretor, posterpath, popularidade, data_lancamento, id_genero, nome from filme f, genero g where f.id_genero = g.id and f.id = ?";
+		
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement pst = conn.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();) {
+
+			while (rs.next()) {
+				Filme filme = new Filme();
+				filme.setId(rs.getInt("f.id"));
+				filme.setTitulo(rs.getString("titulo"));
+				filme.setDescricao(rs.getString("descricao"));
+				filme.setDiretor(rs.getString("diretor"));
+				filme.setPosterPath(rs.getString("posterpath"));
+				filme.setPopularidade(rs.getDouble("popularidade"));
+				filme.setDataLancamento(rs.getDate("data_lancamento"));
+				Genero genero = new Genero();
+				genero.setId(rs.getInt("id_genero"));
+				genero.setNome(rs.getString("nome"));
+				filme.setGenero(genero);
+				
+				filmes.add(filme);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new IOException(e);
+		}
+		return filmes;
+	}
 	
 }
 
