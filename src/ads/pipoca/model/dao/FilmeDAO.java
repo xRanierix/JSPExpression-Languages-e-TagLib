@@ -81,7 +81,7 @@ public class FilmeDAO {
 		return filme;
 	}
 	
-	//RASCUNHO
+	
 	public Filme atualizarFilme(Filme filme) throws IOException {
 		
 		String sql = "UPDATE filme "
@@ -110,6 +110,6 @@ public class FilmeDAO {
 		filmeTeste = buscarFilme(filme.getId());
 		return filmeTeste;
 	}
-	//FIM DO RASCUNHO
+	
 }
 
