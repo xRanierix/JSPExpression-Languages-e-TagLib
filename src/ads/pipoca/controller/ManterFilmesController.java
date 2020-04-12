@@ -28,7 +28,15 @@ public class ManterFilmesController extends HttpServlet {
 		Genero genero = null;
 		FilmeService fService = new FilmeService();
 		GeneroService gService = new GeneroService();
-		String saida = "";
+		String saida = null, 
+			   titulo = null,
+			   descricao = null,
+			   diretor = null,
+			   posterPath = null;
+		double popularidade;
+		int idGenero,idFilme;
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date dataLanc = null;
 		
 		switch(acao) {
 		case "generos":
@@ -38,35 +46,33 @@ public class ManterFilmesController extends HttpServlet {
 			break;
 		case "mostrar":
 			String id_filme = request.getParameter("id_filme");
-			int idFilme = Integer.parseInt(id_filme);
+			idFilme = Integer.parseInt(id_filme);
 			filme = fService.buscarFilme(idFilme);
 			System.out.println(filme);
 			request.setAttribute("filme", filme);
 			saida = "Filme.jsp";
 			break;
 		case "inserir":
-			String titulo = request.getParameter("titulo");
-			String descricao = request.getParameter("descricao");
-			String diretor = request.getParameter("diretor");
-			String idGenero = request.getParameter("genero");
-			String data = request.getParameter("data_lancamento");
-			String popularidade = request.getParameter("popularidade");
-			String posterPath = request.getParameter("poster_path");
+			titulo = request.getParameter("titulo");
+			descricao = request.getParameter("descricao");
+			diretor = request.getParameter("diretor");
+			idGenero = Integer.parseInt(request.getParameter("genero")); 
+			popularidade = Double.parseDouble(request.getParameter("popularidade"));
+			posterPath = request.getParameter("poster_path");
 			filme = new Filme();
 			filme.setTitulo(titulo);
 			filme.setDescricao(descricao);
 			filme.setDiretor(diretor);
-			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date dataLanc = null;
+			
 			try {
-				dataLanc = formater.parse(data);
+				dataLanc = formater.parse(request.getParameter("data_lancamento"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 			filme.setDataLancamento(dataLanc);
-			filme.setPopularidade(Double.parseDouble(popularidade));
+			filme.setPopularidade(popularidade);
 			filme.setPosterPath(posterPath);
-			genero = gService.buscarGenero(Integer.parseInt(idGenero));
+			genero = gService.buscarGenero(idGenero);
 			filme.setGenero(genero);
 			int id = fService.inserirFilme(filme);
 			filme.setId(id);
@@ -75,6 +81,32 @@ public class ManterFilmesController extends HttpServlet {
 			saida = "Filme.jsp";
 			break;
 		case "atualizar":
+			idFilme = Integer.parseInt(request.getParameter("id"));
+			titulo = request.getParameter("titulo");
+			descricao = request.getParameter("descricao");
+			diretor = request.getParameter("diretor");
+			idGenero = Integer.parseInt(request.getParameter("genero")); 
+			popularidade = Double.parseDouble(request.getParameter("popularidade"));
+			posterPath = request.getParameter("poster_path");
+			filme = new Filme();
+			filme.setTitulo(titulo);
+			filme.setDescricao(descricao);
+			filme.setDiretor(diretor);
+			
+			try {
+				dataLanc = formater.parse(request.getParameter("data_lancamento"));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			filme.setDataLancamento(dataLanc);
+			filme.setPopularidade(popularidade);
+			filme.setPosterPath(posterPath);
+			genero = gService.buscarGenero(idGenero);
+			filme.setGenero(genero);
+			filme.setId(idFilme);
+			Filme filmeAtualizado = fService.atualizarFilme(filme);
+			request.setAttribute("filme", filmeAtualizado);
+			saida = "Filme.jsp";
 			break;
 		case "excluir":
 			break;
