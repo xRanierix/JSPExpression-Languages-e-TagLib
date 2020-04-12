@@ -134,7 +134,7 @@ public class FilmeDAO {
 	
 	public ArrayList<Filme> listarFilmes() throws IOException {
 		ArrayList<Filme> filmes = new ArrayList<>();
-		String sql = "select f.id, titulo, descricao, diretor, posterpath, popularidade, data_lancamento, id_genero, nome from filme f, genero g where f.id_genero = g.id and f.id = ?";
+		String sql = "select f.id, titulo, descricao, diretor, posterpath, popularidade, data_lancamento, id_genero, nome from filme f, genero g where f.id_genero = g.id";
 		
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
@@ -142,7 +142,7 @@ public class FilmeDAO {
 
 			while (rs.next()) {
 				Filme filme = new Filme();
-				filme.setId(rs.getInt("f.id"));
+				filme.setId(rs.getInt("id"));
 				filme.setTitulo(rs.getString("titulo"));
 				filme.setDescricao(rs.getString("descricao"));
 				filme.setDiretor(rs.getString("diretor"));

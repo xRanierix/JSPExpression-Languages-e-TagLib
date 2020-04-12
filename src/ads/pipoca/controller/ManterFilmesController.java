@@ -21,26 +21,23 @@ import ads.pipoca.model.service.GeneroService;
 public class ManterFilmesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
 		Filme filme = null;
 		Genero genero = null;
 		FilmeService fService = new FilmeService();
 		GeneroService gService = new GeneroService();
-		String saida = null, 
-			   titulo = null,
-			   descricao = null,
-			   diretor = null,
-			   posterPath = null;
+		String saida = null, titulo = null, descricao = null, diretor = null, posterPath = null;
 		double popularidade;
-		int idGenero,idFilme;
+		int idGenero, idFilme;
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date dataLanc = null;
 		ArrayList<Genero> generos = new ArrayList<Genero>();
 		ArrayList<Filme> filmes = new ArrayList<Filme>();
-		
-		switch(acao) {
+
+		switch (acao) {
 		case "filmes":
 			filmes = fService.listarFilmes();
 			request.setAttribute("filmes", filmes);
@@ -63,14 +60,14 @@ public class ManterFilmesController extends HttpServlet {
 			titulo = request.getParameter("titulo");
 			descricao = request.getParameter("descricao");
 			diretor = request.getParameter("diretor");
-			idGenero = Integer.parseInt(request.getParameter("genero")); 
+			idGenero = Integer.parseInt(request.getParameter("genero"));
 			popularidade = Double.parseDouble(request.getParameter("popularidade"));
 			posterPath = request.getParameter("poster_path");
 			filme = new Filme();
 			filme.setTitulo(titulo);
 			filme.setDescricao(descricao);
 			filme.setDiretor(diretor);
-			
+
 			try {
 				dataLanc = formater.parse(request.getParameter("data_lancamento"));
 			} catch (ParseException e) {
@@ -87,7 +84,7 @@ public class ManterFilmesController extends HttpServlet {
 			request.setAttribute("filme", filme);
 			saida = "Filme.jsp";
 			break;
-			
+
 		case "page_atualizar":
 			idFilme = Integer.parseInt(request.getParameter("id_atualizar"));
 			filme = fService.buscarFilme(idFilme);
@@ -95,23 +92,23 @@ public class ManterFilmesController extends HttpServlet {
 			request.setAttribute("generos", generos);
 			request.setAttribute("filme", filme);
 			saida = "AtualizarFilme.jsp";
-			
+
 			break;
-			
+
 		case "atualizar":
 			idFilme = Integer.parseInt(request.getParameter("id_filme"));
-			
+
 			titulo = request.getParameter("titulo");
 			descricao = request.getParameter("descricao");
 			diretor = request.getParameter("diretor");
-			idGenero = Integer.parseInt(request.getParameter("genero")); 
+			idGenero = Integer.parseInt(request.getParameter("genero"));
 			popularidade = Double.parseDouble(request.getParameter("popularidade"));
 			posterPath = request.getParameter("poster_path");
 			filme = new Filme();
 			filme.setTitulo(titulo);
 			filme.setDescricao(descricao);
 			filme.setDiretor(diretor);
-			
+
 			try {
 				dataLanc = formater.parse(request.getParameter("data_lancamento"));
 			} catch (ParseException e) {
@@ -127,31 +124,32 @@ public class ManterFilmesController extends HttpServlet {
 			request.setAttribute("filme", filmeAtualizado);
 			saida = "Filme.jsp";
 			break;
-			
+
 		case "excluir":
-			
+
 			idFilme = Integer.parseInt(request.getParameter("id_excluir"));
-			
+
 			filme = fService.buscarFilme(idFilme);
-			if(filme != null ) {
-				
+			if (filme != null) {
+
 				int result = fService.excluirFilme(idFilme);
-				request.setAttribute("filme",filme);
-				saida ="Filme.jsp";
-				
-			}else {
+				request.setAttribute("filme", filme);
+				saida = "Filme.jsp";
+
+			} else {
 				saida = "nExiste.html";
 			}
-			
+
 			break;
 		}
 		RequestDispatcher view = request.getRequestDispatcher(saida);
 		view.forward(request, response);
-		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
