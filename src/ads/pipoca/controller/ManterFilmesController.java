@@ -37,10 +37,11 @@ public class ManterFilmesController extends HttpServlet {
 		int idGenero,idFilme;
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date dataLanc = null;
+		ArrayList<Genero> generos = new ArrayList<Genero>();
 		
 		switch(acao) {
 		case "generos":
-			ArrayList<Genero> generos = gService.listarGeneros();
+			generos = gService.listarGeneros();
 			request.setAttribute("generos", generos);
 			saida = "InserirFilme.jsp";
 			break;
@@ -80,8 +81,20 @@ public class ManterFilmesController extends HttpServlet {
 			request.setAttribute("filme", filme);
 			saida = "Filme.jsp";
 			break;
+			
+		case "page_atualizar":
+			idFilme = Integer.parseInt(request.getParameter("id_atualizar"));
+			filme = fService.buscarFilme(idFilme);
+			generos = gService.listarGeneros();
+			request.setAttribute("generos", generos);
+			request.setAttribute("filme", filme);
+			saida = "AtualizarFilme.jsp";
+			
+			break;
+			
 		case "atualizar":
-			idFilme = Integer.parseInt(request.getParameter("id"));
+			idFilme = Integer.parseInt(request.getParameter("id_filme"));
+			
 			titulo = request.getParameter("titulo");
 			descricao = request.getParameter("descricao");
 			diretor = request.getParameter("diretor");
