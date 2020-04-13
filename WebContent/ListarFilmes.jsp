@@ -12,10 +12,22 @@
 <body>
 <h1>Lista de Filmes</h1>
 
-<c:forEach var="filme" items="${filmes}">
-<p>${filme}</p>
-<img src="${filme.posterPath}"></img>
 
+
+<c:forEach var="filme" items="${filmes}">
+	
+	<div style="">
+		<form action="manter_filmes.do" method="GET">
+			
+			<p><button type="submit" name="acao" value="page_atualizar">Atualizar Filme</button></p>
+			<p>${filme}</p>
+			<img src="${filme.posterPath}"></img>
+			<input type="hidden" name="id_atualizar" value="${filme.id}"/>
+			
+		</form>
+	
+	</div>
+	<hr>
 
 </c:forEach>
 
