@@ -52,6 +52,10 @@ public class ManterFilmesController extends HttpServlet {
 			String id_filme = request.getParameter("id_filme");
 			idFilme = Integer.parseInt(id_filme);
 			filme = fService.buscarFilme(idFilme);
+			if(filme == null) {
+				saida = "nExiste.html";
+				break;
+			}
 			System.out.println(filme);
 			request.setAttribute("filme", filme);
 			saida = "Filme.jsp";
