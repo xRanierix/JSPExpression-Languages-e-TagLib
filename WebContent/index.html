@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Filme</title>
-</head> 						<!-- Indice da porra toda! --> 
+<!-- Font-awesome - ícones -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        
+<!-- Fonte do Google -->
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Source+Sans+Pro" rel="stylesheet" />
+
+</head>
 <body>
 	<h1>Filme</h1>																	<!-- Caso de uso 1 -->
 	<p> Digite o código do filme para mostrar seus dados.</p>				
@@ -24,7 +30,9 @@
 	
 	</form>
 	
-	<form action="manter_filmes.do" method="GET">									<!-- Caso de uso 3 -->
+	
+	
+	<form action="manter_filmes.do" method="GET">
 	<h1>Deletar Filme</h1>	
 	<p>Digite o código do filme que deseja excluir</p>
 	<label>Id do Filme:</label>
@@ -35,11 +43,8 @@
 	
 	<form action="manter_filmes.do" method="GET">									<!-- Caso de uso 1 -->
 	<h1>Listar Filmes</h1>	
-	<p>Digite o código do filme que deseja excluir</p>
-	<label>Id do Filme:</label>
+	<p>Listar todos Filmes <input type= "submit" name="acao" value="filmes"> </p>
 		
-		<input type= "submit" name="acao" value="filmes">
-	
 	</form>
 	
 	
