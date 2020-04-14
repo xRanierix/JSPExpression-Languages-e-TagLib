@@ -18,9 +18,9 @@ public class FilmeService {
 		return dao.atualizarFilme(filme);
 	}
 
-	public Filme buscarFilme(int id) throws IOException {
-		FilmeDAO dao = new FilmeDAO();
-		return dao.buscarFilme(id);
+	public Filme buscarFilme(int id) throws IOException { //só chama o DAO
+		FilmeDAO dao = new FilmeDAO(); //instaciei o DAO puramente para poder utilizar os métodos dele
+		return dao.buscarFilme(id); //o benedito que eu preciso de fato
 	}
 	
 	public int excluirFilme(int id) throws IOException {

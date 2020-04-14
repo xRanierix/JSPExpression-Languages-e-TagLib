@@ -20,7 +20,7 @@
 
 
 
-<c:forEach var="filme" items="${filmes}">
+<c:forEach var="filme" items="${filmes}"> <!-- percorre toda array com o for, para cada item dela ele gera o bloco abaixo-->
 	
 	<div style="">
 		<form action="manter_filmes.do" method="GET">

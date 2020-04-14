@@ -13,12 +13,11 @@
 <body>
 	<h1>Filme</h1>																	<!-- Caso de uso 1 -->
 	<p> Digite o código do filme para mostrar seus dados.</p>				
-	<form action="manter_filmes.do" method="GET">
+	<form action="manter_filmes.do" method="GET">  <!-- manter_filmes.do linka este formulário e as ações do controller-->
 		<label>Id do Filme:</label>
-		<input type="text" name="id_filme"/>
-		<input type="submit" name="acao" value="mostrar">
+		<input type="text" name="id_filme"/> <!-- criei a var que vai corresponder ao que o usuário digitar -->
+		<input type="submit" name="acao" value="mostrar"> <!-- o "acao" define a ação a ser aplicada no controller -->
 	</form>
-	
 	
 	<form action="manter_filmes.do" method="GET">									<!-- Caso de uso 2 -->
 	<h1>Atualizar Filme</h1>
@@ -26,25 +25,24 @@
 	<label>Id do Filme:</label>
 		<input type="text" name="id_atualizar"/>
 		<input type="submit" name="acao" value="page_atualizar">
-	
-	
 	</form>
 	
-	
-	
-	<form action="manter_filmes.do" method="GET">
+	<form action="manter_filmes.do" method="GET">									<!-- Caso de uso 3-->
 	<h1>Deletar Filme</h1>	
 	<p>Digite o código do filme que deseja excluir</p>
 	<label>Id do Filme:</label>
 		<input type="text" name="id_excluir"/>
 		<input type= "submit" name="acao" value="excluir">
-	
 	</form>
 	
-	<form action="manter_filmes.do" method="GET">									<!-- Caso de uso 1 -->
+	<form action="manter_filmes.do" method="GET">									<!-- Caso de uso 4-->
 	<h1>Listar Filmes</h1>	
-	<p>Listar todos Filmes <input type= "submit" name="acao" value="filmes"> </p>
-		
+	<p>Listar todos Filmes <input type= "submit" name="acao" value="filmes"> </p>	
+	</form>
+	
+	<form action="manter_filmes.do" method="GET">									<!-- Caso de uso 5 -->
+	<h1>Inserir Filme</h1>
+		<input type="submit" name="acao" value="generos">
 	</form>
 	
 	
