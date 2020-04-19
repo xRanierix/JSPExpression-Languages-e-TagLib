@@ -24,7 +24,7 @@ public class ManterFilmesController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) //começa a ação com os dados recebidos
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String acao = request.getParameter("acao"); //criou a a variável acao no java que recebe a variáveis "acao" do html
+		String acao = request.getParameter("acao"); //criou a  variável acao no java que recebe a variáveis "acao" do html
 		
 		Filme filme = null;               //criando variáveis para serem usadas depois
 		Genero genero = null;
@@ -45,9 +45,9 @@ public class ManterFilmesController extends HttpServlet {
 			saida = "ListarFilmes.jsp"; //arquivo jsp que desejo carregar
 			break;
 		case "generos":
-			generos = gService.listarGeneros(); 
-			request.setAttribute("generos", generos);
-			saida = "InserirFilme.jsp";
+			generos = gService.listarGeneros(); //puxando as informações de gênero do banco e colocando no objetivo da minha array criada na linha 38
+			request.setAttribute("generos", generos); //jogando pro jsp
+			saida = "InserirFilme.jsp"; //este jsp específicamente
 			break;
 		case "mostrar":
 		  
@@ -63,41 +63,48 @@ public class ManterFilmesController extends HttpServlet {
 			saida = "Filme.jsp"; //endereço onde será enviado
 			break;
 		case "inserir":
-			titulo = request.getParameter("titulo");
+			titulo = request.getParameter("titulo");  //recebe a var "titulo" do html e coloca ela na var do java titulo
 			descricao = request.getParameter("descricao");
 			diretor = request.getParameter("diretor");
-			idGenero = Integer.parseInt(request.getParameter("genero"));
-			popularidade = Double.parseDouble(request.getParameter("popularidade"));
+			idGenero = Integer.parseInt(request.getParameter("genero")); // mesmo passo da linha 66 porém convertendo para int
+			popularidade = Double.parseDouble(request.getParameter("popularidade")); // mesmo passo da linha 66 porém convertendo para double
 			posterPath = request.getParameter("poster_path");
-			filme = new Filme();
-			filme.setTitulo(titulo);
-			filme.setDescricao(descricao);
-			filme.setDiretor(diretor);
-
+			
+			//Convertendo Data
 			try {
-				dataLanc = formater.parse(request.getParameter("data_lancamento"));
-			} catch (ParseException e) {
+				dataLanc = formater.parse(request.getParameter("data_lancamento")); // mesmo passo da linha 66 porém convertendo pra data, o formato da data foi definido na linha 36
+			} catch (ParseException e) {											
 				e.printStackTrace();
 			}
+			
+			//busca no banco o genero a partir da id que o usuário inseriu, colocando ela na var genero
+			genero = gService.buscarGenero(idGenero);  
+			
+			//Mandando pro banco
+			filme = new Filme(); //instanciei o objeto que será recebido no método inserirFilme
+			filme.setTitulo(titulo);
+			filme.setDescricao(descricao);
+			filme.setDiretor(diretor);		
 			filme.setDataLancamento(dataLanc);
 			filme.setPopularidade(popularidade);
-			filme.setPosterPath(posterPath);
-			genero = gService.buscarGenero(idGenero);
+			filme.setPosterPath(posterPath);	
 			filme.setGenero(genero);
-			int id = fService.inserirFilme(filme);
-			filme.setId(id);
-			System.out.println(filme);
-			request.setAttribute("filme", filme);
+			
+			//chamar método para inserir o filme
+			// toda vez que um metodo tem um retorno, uma var tem que receber ele.
+			int id = fService.inserirFilme(filme); //chamando o metodo inserirFilme, inserindo ele no banco 
+			filme.setId(id); //pego o id da linha 95 que o banco me retornou e insere no objeto filme
+			request.setAttribute("filme", filme); //passando o objeto filme para o "filme" do jsp
 			saida = "Filme.jsp";
 			break;
 
 		case "page_atualizar":
-			idFilme = Integer.parseInt(request.getParameter("id_atualizar"));
-			filme = fService.buscarFilme(idFilme);
-			generos = gService.listarGeneros();
-			request.setAttribute("generos", generos);
-			request.setAttribute("filme", filme);
-			saida = "AtualizarFilme.jsp";
+			idFilme = Integer.parseInt(request.getParameter("id_atualizar")); //"id_atualizar" é convertido pra int e jogado no idFilme
+			filme = fService.buscarFilme(idFilme); //filme recebe o resultado do buscar filme, utilizando o idFilme como referência
+			generos = gService.listarGeneros(); //generos recebe a lista de gêneros do banco via array
+			request.setAttribute("generos", generos); // relaciona o item do jsp e o do java
+			request.setAttribute("filme", filme); // mesma coisa da linha acima 
+			saida = "AtualizarFilme.jsp"; //joga o resultado no jsp.
 
 			break;
 
@@ -126,9 +133,12 @@ public class ManterFilmesController extends HttpServlet {
 			genero = gService.buscarGenero(idGenero);
 			filme.setGenero(genero);
 			filme.setId(idFilme);
-			Filme filmeAtualizado = fService.atualizarFilme(filme);
+			
+			//Atualizando o filme do banco com as informações novas que alterei acima
+			Filme filmeAtualizado = fService.atualizarFilme(filme); //o filmeAtualizado recebe do banco o filme que acabei de atualizar
+			
 			request.setAttribute("filme", filmeAtualizado); // "filme" corresponde a variável do jsp. e filmeAtualizado corresponde a var. do java
-			saida = "Filme.jsp";
+			saida = "Filme.jsp"; //saida via jsp
 			break;
 
 		case "excluir":
@@ -138,9 +148,9 @@ public class ManterFilmesController extends HttpServlet {
 			filme = fService.buscarFilme(idFilme);
 			if (filme != null) {
 
-				int result = fService.excluirFilme(idFilme);
-				request.setAttribute("filme", filme);
-				saida = "Filme.jsp";
+				fService.excluirFilme(idFilme);
+				request.setAttribute("filme", filme); // da linha 148
+				saida = "Filme.jsp"; // saída via jsp.
 
 			} else {
 				saida = "nExiste.html";
@@ -148,12 +158,12 @@ public class ManterFilmesController extends HttpServlet {
 
 			break;
 		}
-		RequestDispatcher view = request.getRequestDispatcher(saida);
-		view.forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher(saida); // o view recebeu da var saida a ação 
+		view.forward(request, response); // E o view forward emite a visualização
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) //Chama doGet
 			throws ServletException, IOException {
 
 		doGet(request, response);

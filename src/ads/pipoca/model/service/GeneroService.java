@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import ads.pipoca.model.dao.GeneroDAO;
 import ads.pipoca.model.entity.Genero;
 
+//Faz o meio de campo entre o banco e o controller
 public class GeneroService {
 	public ArrayList<Genero> listarGeneros() throws IOException {
 		GeneroDAO dao = new GeneroDAO();

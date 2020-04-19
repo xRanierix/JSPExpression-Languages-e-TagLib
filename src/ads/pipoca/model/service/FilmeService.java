@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import ads.pipoca.model.dao.FilmeDAO;
 import ads.pipoca.model.entity.Filme;
 
-public class FilmeService {
+//Faz o meio de campo entre o banco e o controller
+public class FilmeService { 
 
 	public int inserirFilme(Filme filme) throws IOException {
 		FilmeDAO dao = new FilmeDAO();

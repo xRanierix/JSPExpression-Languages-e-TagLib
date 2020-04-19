@@ -20,15 +20,16 @@
 <body>
 <h1>Filme</h1>
 	<p> Digite os dados do filme para atualizar</p>
-	<form action="manter_filmes.do" method="POST">
-		<p><input type= "hidden" name="id_filme" value="${filme.id}"/> </p>
+	<form action="manter_filmes.do" method="POST"> <!-- enviando via post -->
+		<p><input type= "hidden" name="id_filme" value="${filme.id}"/> </p> <!-- preenchi o campo com o filme.id -->
 		<p><label>Título do Filme: </label><input type="text" name="titulo" value="${filme.titulo}" required/> </p>
 		<p><label>Descrição: </label><input type="text" name="descricao" value="${filme.descricao}" /></p>
 		<p><label>Diretor: </label><input type="text" name="diretor" value="${filme.diretor}"/>
 		
-		<label>Gênero: </label><select name="genero" required>
+		<label>Gênero: </label><select name="genero" required> <!-- select gera o combobox -->
+		
 		<c:forEach var="genero" items="${generos}">
-			<option value="${genero.id}">${genero.nome}</option>
+			<option value="${genero.id}">${genero.nome}</option> <!-- cada linha é um options -->
 		</c:forEach>
 		</select>
 		</p>
