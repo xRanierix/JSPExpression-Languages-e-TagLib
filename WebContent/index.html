@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Filme</title>
-<!-- Font-awesome - ícones -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-        
-<!-- Fonte do Google -->
-<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Source+Sans+Pro" rel="stylesheet" />
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Hora da Pipoca</title>
 
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<ul>
+	<li><a href="manterfilmes.do?acao=generos">Novo Filme</a></li>
 	<h1>Filme</h1>																	<!-- Caso de uso 1 -->
 	<p> Digite o código do filme para mostrar seus dados.</p>				
 	<form action="manter_filmes.do" method="GET">  <!-- manter_filmes.do linka este formulário e as ações do controller-->
@@ -34,7 +36,7 @@
 		<input type="text" name="id_excluir"/>
 		<input type= "submit" name="acao" value="excluir"> <!-- value é o case que será encontrado no controller através da chamada acao -->
 	</form>
-	
+	 
 	<form action="manter_filmes.do" method="GET">									<!-- Caso de uso 4-->
 	<h1>Listar Filmes</h1>	
 	<p>Listar todos Filmes <input type= "submit" name="acao" value="filmes"> </p>	
@@ -46,6 +48,10 @@
 	</form>
 	
 	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
-</html>
+</html> -->
